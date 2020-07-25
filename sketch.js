@@ -1,5 +1,6 @@
 var points = [];
 var start = false;
+var currentPath = [];
 function setup() {
  var canvas =  createCanvas(displayWidth,displayHeight-110);
 }
@@ -8,7 +9,12 @@ function draw() {
   background(255);
   
   if (start){
-    points.push(point(mouseX,mouseY));
+    var point = {
+      x:mouseX,
+      y:mouseY
+    }
+    currentPath.push(point);
+    //console.log(currentPath);
   }
 
   stroke(0);
@@ -23,12 +29,13 @@ function draw() {
   }
   endShape();
 
-  //console.log(points);
+  console.log(start);
 }
 
 function mousePressed(){
   start = true;
-  points = [];
+  currentPath = [];
+  points.push(currentPath);
 }
 
 function mouseReleased(){
