@@ -1,41 +1,44 @@
 var points = [];
-var start = false;
+//var start = false;
 var currentPath = [];
-function setup() {
- var canvas =  createCanvas(displayWidth,displayHeight-110);
+var canvas;
+
+function setup(){
+  canvas =  createCanvas(displayWidth-50,displayHeight-110);
 }
 
-function draw() {
-  background(255);
+function draw(){
+  background(211);
   
-  if (start){
+  /*if (start){
     var point = {
       x:mouseX,
       y:mouseY
     }
     currentPath.push(point);
     //console.log(currentPath);
-  }
+  }*/
 
+  beginShape();
   stroke(0);
   strokeWeight(2);
   noFill();
-  beginShape();
   //for loop for drawing the newest point in the array
   for(var i = 0; i < points.length; i++){
-    var x = points[i].x;
-    var y = points[i].y;
-    vertex(x,y);
+    vertex(points[i].x,points[i].y);
   }
   endShape();
-
-  console.log(start);
 }
 
-function mousePressed(){
+/*function mouseDragged(){
   start = true;
   currentPath = [];
   points.push(currentPath);
+}*/
+
+function mouseDragged(){
+  var point = {x: mouseX, y: mouseY};
+  points.push(point);
 }
 
 function mouseReleased(){
