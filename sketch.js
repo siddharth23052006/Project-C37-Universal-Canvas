@@ -1,7 +1,7 @@
 var currentPath = [];
 var canvas, db;
-var drawing = [];
-var saveButton, nameInput, nameVal;
+var drawings = [];
+var saveButton; nameInput, nameVal;
 var isDrawing = false;
 
 function setup(){
@@ -12,15 +12,14 @@ function setup(){
 
   db = firebase.database();
 
-  saveButton = select('#saveButton');
-  saveButton.mousePressed(saveDrawing(nameVal));
+  nameInput = createInput('Your Name');
 
-  nameInput = createInput('h2');
+  saveButton = select('#saveButton');
+  saveButton.mousePressed(saveDrawing);
 }
 
 function draw(){
   background(0);
-  nameInput.position(saveButton.position.x + 70, saveButton.position.y);
   nameInput.html('Your Name');
   nameVal = nameInput.value();
 
@@ -33,8 +32,8 @@ function draw(){
   noFill();
 
   //for loop for drawing the newest point in the array
-  for(var i = 0; i < drawing.length; i++){
-    var path = drawing[i];
+  for(var i = 0; i < drawings.length; i++){
+    var path = drawings[i];
     beginShape();
     for(var j = 0; j < path.length; j++){
       vertex(path[j].x, path[j].y);
@@ -46,22 +45,19 @@ function draw(){
 function startPath(){
   isDrawing = true;
   currentPath = [];
-  drawing.push(currentPath);
+  drawings.push(currentPath);
 }
 
 function endPath(){
   isDrawing = false;
 }
 
-function saveDrawing(name){
+function saveDrawing(){
   var ref = db.ref('drawings');
   var data = {
-    name: name,
-    drawing: drawing
+    name: nameVal,
+    drawing: drawings
   }
 
-  ref.update(data/*, dataSent=(status)=>{
-    //console.log(status);
-  });
-  //console.log(result.key*/);
+  ref.push(data);
 }
