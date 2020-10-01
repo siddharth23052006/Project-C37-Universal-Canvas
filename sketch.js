@@ -1,7 +1,7 @@
 var currentPath = [];
 var canvas, db;
 var drawing = [];
-var saveButton, nameInput;
+var saveButton, nameInput, nameVal;
 var isDrawing = false;
 
 function setup(){
@@ -13,14 +13,16 @@ function setup(){
   db = firebase.database();
 
   saveButton = select('#saveButton');
-  saveButton.mousePressed(saveDrawing);
+  saveButton.mousePressed(saveDrawing(nameVal));
 
   nameInput = createInput('h2');
-  nameInput.position(saveButton.position.x + 70, saveButton.position.y);
 }
 
 function draw(){
   background(0);
+  nameInput.position(saveButton.position.x + 70, saveButton.position.y);
+  nameInput.html('Your Name');
+  nameVal = nameInput.value();
 
   if (mouseIsPressed){
     var point = {x: mouseX, y: mouseY};
@@ -51,10 +53,10 @@ function endPath(){
   isDrawing = false;
 }
 
-function saveDrawing(){
+function saveDrawing(name){
   var ref = db.ref('drawings');
   var data = {
-    name: "Siddharth",
+    name: name,
     drawing: drawing
   }
 
