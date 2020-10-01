@@ -1,7 +1,7 @@
 var currentPath = [];
 var canvas, db;
 var drawing = [];
-var saveButton;
+var saveButton, nameInput;
 var isDrawing = false;
 
 function setup(){
@@ -14,6 +14,9 @@ function setup(){
 
   saveButton = select('#saveButton');
   saveButton.mousePressed(saveDrawing);
+
+  nameInput = createInput('h2');
+  nameInput.position(saveButton.position.x + 70, saveButton.position.y);
 }
 
 function draw(){
