@@ -1,11 +1,19 @@
 var currentPath = [];
-var canvas, database;
+var canvas, db;
 var drawing = [];
+var saveButton;
+var isDrawing = false;
 
 function setup(){
-  canvas =  createCanvas(windowWidth, windowHeight);
+  canvas =  createCanvas(windowWidth, windowHeight - 80);
   canvas.mousePressed(startPath);
-  database = firebase.database();
+  canvas.parent('canvasContainer');
+  canvas.mouseReleased(endPath);
+
+  db = firebase.database();
+
+  saveButton = select('#saveButton');
+  saveButton.mousePressed(saveDrawing);
 }
 
 function draw(){
@@ -14,7 +22,6 @@ function draw(){
   if (mouseIsPressed){
     var point = {x: mouseX, y: mouseY};
     currentPath.push(point);  }
-
   
   stroke(255);
   strokeWeight(2);
@@ -32,6 +39,24 @@ function draw(){
 }
 
 function startPath(){
+  isDrawing = true;
   currentPath = [];
   drawing.push(currentPath);
+}
+
+function endPath(){
+  isDrawing = false;
+}
+
+function saveDrawing(){
+  var ref = db.ref('drawings');
+  var data = {
+    name: "Siddharth",
+    drawing: drawing
+  }
+
+  ref.update(data/*, dataSent=(status)=>{
+    //console.log(status);
+  });
+  //console.log(result.key*/);
 }
