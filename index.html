@@ -1,12 +1,34 @@
-<!DOCTYPE html><html><head>
-    <script src="p5.js"></script>
-    <script src="p5.dom.min.js"></script>
-    <script src="p5.sound.min.js"></script>
-    <script src="p5.play.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Universal Canvas</title>
+      <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
 
+      <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyDLL5jHASBaEbK3xw2FjHFL8L4kvwcgaLs",
+          authDomain: "universal-canvas-5a6c1.firebaseapp.com",
+          databaseURL: "https://universal-canvas-5a6c1.firebaseio.com",
+          projectId: "universal-canvas-5a6c1",
+          storageBucket: "universal-canvas-5a6c1.appspot.com",
+          messagingSenderId: "482237954935",
+          appId: "1:482237954935:web:7f12580f928699cd7d3f72"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+
+      <script src="p5.js"></script>
+      <script src="p5.dom.min.js"></script>
+      <script src="p5.sound.min.js"></script>
+      <script src="p5.play.js"></script>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <meta charset="utf-8">
   </head>
-  <body>
-      <script src="sketch.js"></script>
-</body></html>
+
+    <body>
+        <script src="sketch.js"></script>
+    </body>
+  </html>

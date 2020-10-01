@@ -1,46 +1,37 @@
-var points = [];
-//var start = false;
 var currentPath = [];
-var canvas;
+var canvas, database;
+var drawing = [];
 
 function setup(){
-  canvas =  createCanvas(displayWidth-50,displayHeight-110);
+  canvas =  createCanvas(windowWidth, windowHeight);
+  canvas.mousePressed(startPath);
+  database = firebase.database();
 }
 
 function draw(){
-  background(211);
-  
-  /*if (start){
-    var point = {
-      x:mouseX,
-      y:mouseY
-    }
-    currentPath.push(point);
-    //console.log(currentPath);
-  }*/
+  background(0);
 
-  beginShape();
-  stroke(0);
+  if (mouseIsPressed){
+    var point = {x: mouseX, y: mouseY};
+    currentPath.push(point);  }
+
+  
+  stroke(255);
   strokeWeight(2);
   noFill();
+
   //for loop for drawing the newest point in the array
-  for(var i = 0; i < points.length; i++){
-    vertex(points[i].x,points[i].y);
+  for(var i = 0; i < drawing.length; i++){
+    var path = drawing[i];
+    beginShape();
+    for(var j = 0; j < path.length; j++){
+      vertex(path[j].x, path[j].y);
+    }
+    endShape();
   }
-  endShape();
 }
 
-/*function mouseDragged(){
-  start = true;
+function startPath(){
   currentPath = [];
-  points.push(currentPath);
-}*/
-
-function mouseDragged(){
-  var point = {x: mouseX, y: mouseY};
-  points.push(point);
-}
-
-function mouseReleased(){
-  start = false;
+  drawing.push(currentPath);
 }
