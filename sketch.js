@@ -1,7 +1,7 @@
 var currentPath = [];
 var canvas, db;
 var drawings = [];
-var saveButton; nameInput, nameVal;
+var saveButton; nameInput, nameVal, resetButton;
 var isDrawing = false;
 
 function setup(){
@@ -16,6 +16,9 @@ function setup(){
 
   saveButton = select('#saveButton');
   saveButton.mousePressed(saveDrawing);
+
+  resetButton = select('#resetButton');
+  resetButton.mousePressed(clearDrawing)
 }
 
 function draw(){
@@ -60,4 +63,8 @@ function saveDrawing(){
   }
 
   ref.push(data);
+}
+
+function clearDrawing(){
+  drawings = [];
 }
